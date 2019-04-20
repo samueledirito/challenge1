@@ -12,7 +12,7 @@ functions:
   saveToDynamo:
     handler: index.saveToDynamo
     events:
-      - schedule: cron(0 1 * * * *)
+      - schedule: cron(0 1 * * ? *)
 
 custom:
   secrets: ${file(secrets.json)}
