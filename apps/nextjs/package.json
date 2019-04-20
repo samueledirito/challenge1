@@ -5,8 +5,7 @@
   "main": "handler.js",
   "scripts": {
     "start": "next",
-    "build": "next build",
-    "deploy": "next build && sls deploy"
+    "build": "next build"
   },
   "keywords": [],
   "author": "",

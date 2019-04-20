@@ -3,7 +3,7 @@
   "private": false,
   "version": "1.0.0",
   "description": "",
-  "main": "handler.js",
+  "main": "index.js",
   "scripts": {
     "deploy": "sls deploy"
   },
