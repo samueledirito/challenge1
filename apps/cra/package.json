@@ -1,7 +1,7 @@
 {
   "name": "@challenge1/cra",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -11,7 +11,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "deploy": "npm run build && aws s3 sync build/ s3://challenge1-cra"
   },
   "eslintConfig": {
     "extends": "react-app"
