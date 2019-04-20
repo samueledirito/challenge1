@@ -7,10 +7,21 @@ provider:
   region: us-east-1
   environment: 
     NODE_ENV: ${self:custom.secrets.NODE_ENV}
-
+    CSV_STORAGE_BUCKET: ${self:custom.secrets.CSV_STORAGE_BUCKET}
+    CUSTOMER_CSV_ENDPOINT: ${self:custom.secrets.CUSTOMER_CSV_ENDPOINT}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+      Resource: "arn:aws:s3:::${self:custom.secrets.CSV_STORAGE_BUCKET}/*"
 functions:
-  saveToDynamo:
-    handler: index.saveToDynamo
+  saveToS3:
+    name: fetch-file-and-store-to-S3-${self:custom.secrets.NODE_ENV}
+    handler: index.saveToS3
+    environment: 
+      NODE_ENV: ${self:custom.secrets.NODE_ENV}
+      CSV_STORAGE_BUCKET: ${self:custom.secrets.CSV_STORAGE_BUCKET}
+      CUSTOMER_CSV_ENDPOINT: ${self:custom.secrets.CUSTOMER_CSV_ENDPOINT}
     events:
       - schedule: cron(0 1 * * ? *)
 
