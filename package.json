@@ -16,7 +16,8 @@
     "lerna": "^3.13.1"
   },
   "scripts": {
-    "nextjs": "lerna run start --scope=@challenge1/nextjs --stream"
+    "nextjs": "lerna run start --scope=@challenge1/nextjs --stream",
+    "cra": "lerna run start --scope=@challenge1/cra --stream"
   },
   "keywords": [],
   "author": "",
