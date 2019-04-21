@@ -1,0 +1,44 @@
+service: save-customer-from-csv
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${self:custom.secrets.NODE_ENV}
+  region: us-east-1
+  environment: 
+    NODE_ENV: ${self:custom.secrets.NODE_ENV}
+    CSV_STORAGE_BUCKET: ${self:custom.secrets.CSV_STORAGE_BUCKET}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:GetObject
+      Resource: "arn:aws:s3:::${self:custom.secrets.CSV_STORAGE_BUCKET}/*"
+    - Effect: Allow
+      Action:
+        - dynamodb:Get*,
+        - dynamodb:Query,
+        - dynamodb:Scan,
+        - dynamodb:Delete*,
+        - dynamodb:Update*,
+        - dynamodb:PutItem
+      Resource: "arn:aws:dynamodb:us-east-1:764546723116:table/customers"
+
+functions:
+  save-customers:
+    name: save-customers-${self:custom.secrets.NODE_ENV}
+    handler: index.saveCustomers
+    environment: 
+      NODE_ENV: ${self:custom.secrets.NODE_ENV}
+      CSV_STORAGE_BUCKET: ${self:custom.secrets.CSV_STORAGE_BUCKET}
+    # DEPRECATED
+    # This section has been removed due to AWS recreates bucket when using events: s3 format
+    # Event must be created manually on lambda after every deploy
+    # events:
+    #   - s3:
+    #       bucket: ${self:custom.secrets.CSV_STORAGE_BUCKET}
+    #       event: s3:ObjectCreated:*
+    #       rules:
+    #         - suffix: .csv
+
+custom:
+  secrets: ${file(../secrets.json)}
