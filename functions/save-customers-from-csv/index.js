@@ -1,33 +1,8 @@
 const AWS = require('aws-sdk');
-const moment = require('moment');
 const csv = require('csvtojson');
-
-const toDate = item => moment(item, 'DD_MM_YYYY').format('DD/MM/YYYY');
-const toBoolean = item => item === 'SI';
 
 const convertToJson = async csvContent => csv({
   delimiter: ';',
-  colParser: {
-    BirthDate: toDate,
-    Active: toBoolean,
-    New: toBoolean,
-    RaiFee: toBoolean,
-  },
-  headers: [
-    'CustomerId', // ID_UTENTE
-    'CustomerCode', // CODICE_CLIENTE
-    'Email', // EMAIL
-    'FirstName', // NOME
-    'LastName', // COGNOME
-    'BirthDate', // DATA_NASCITA
-    'FiscalCode', // CODICE_FISCALE
-    'Status', // STATO
-    'Active', // ATTIVO
-    'New', // NUOVO
-    'Network', // RETE
-    'Agent', // AGENTE
-    'RaiFee', // CANONE_RAI
-  ],
 }).fromString(csvContent);
 
 const saveToDynamo = async (customers) => {

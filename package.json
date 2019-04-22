@@ -26,8 +26,9 @@
   "scripts": {
     "nextjs": "lerna run start --scope=@challenge1/nextjs --stream",
     "cra": "lerna run start --scope=@challenge1/cra --stream",
-    "deploy:download-customer-csv": "lerna run deploy --scope=@challenge1/download-customer-csv --stream",
-    "deploy:graphql-server": "lerna run deploy --scope=@challenge1/graphql-server --stream"
+    "deploy:download-customer-csv": "lerna run deploy --scope=@challenge1/fnc-download-customer-csv --stream",
+    "start:graphql-server": "lerna run start --scope=@challenge1/fnc-graphql-server --stream",
+    "deploy:graphql-server": "lerna run deploy --scope=@challenge1/fnc-graphql-server --stream"
   },
   "keywords": [],
   "author": "",
