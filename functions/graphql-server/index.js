@@ -1,5 +1,3 @@
-const sls = require("serverless-http");
+const server = require('./server');
 
-const server = require("./server");
-
-module.exports.server = sls(server);
+module.exports.server = server.handler;

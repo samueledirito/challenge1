@@ -26,4 +26,4 @@ functions:
       - schedule: cron(0 1 * * ? *)
 
 custom:
-  secrets: ${file(secrets.json)}
+  secrets: ${file(../secrets.json)}

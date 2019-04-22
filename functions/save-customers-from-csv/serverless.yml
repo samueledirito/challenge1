@@ -21,7 +21,7 @@ provider:
         - dynamodb:Delete*,
         - dynamodb:Update*,
         - dynamodb:PutItem
-      Resource: "arn:aws:dynamodb:us-east-1:764546723116:table/customers"
+      Resource: ${self:custom.secrets.CUSTOMER_TABLE_ARN}
 
 functions:
   save-customers:

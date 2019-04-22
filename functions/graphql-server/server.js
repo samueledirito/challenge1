@@ -1,11 +1,27 @@
-const express = require("express");
-const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev });
-const handle = app.getRequestHandler();
+const { ApolloServer, gql } = require('apollo-server-lambda');
 
-const server = express();
+// Construct a schema, using GraphQL schema language
+const typeDefs = gql`
+  type Query {
+    hello: String
+  }
+`;
 
-server.get("/", (req, res) => res.json({hello: "world"}));
-server.get("*", (req, res) => handle(req, res));
+// Provide resolver functions for your schema fields
+const resolvers = {
+  Query: {
+    hello: () => 'Hello world!',
+  },
+};
 
-module.exports = server;
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
+
+exports.handler = server.createHandler({
+  cors: {
+    origin: '*',
+    credentials: true,
+  },
+});

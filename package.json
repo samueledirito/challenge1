@@ -20,7 +20,8 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
     "jest": "^24.7.1",
-    "lerna": "^3.13.1"
+    "lerna": "^3.13.1",
+    "serverless-offline": "^4.9.4"
   },
   "scripts": {
     "nextjs": "lerna run start --scope=@challenge1/nextjs --stream",

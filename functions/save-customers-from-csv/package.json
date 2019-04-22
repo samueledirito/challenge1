@@ -1,5 +1,5 @@
 {
-  "name": "@challenge1/save-customers-from-csv",
+  "name": "@challenge1/fnc-save-customers-from-csv",
   "version": "1.0.0",
   "description": "",
   "main": "handler.js",
